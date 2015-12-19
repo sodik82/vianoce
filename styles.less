@@ -1,0 +1,420 @@
+.tien {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: -webkit-radial-gradient(10px 10px, circle, rgba(0,0,0,0.0), rgba(0,0,0,0.7));
+  background: -moz-radial-gradient(10px 10px, circle, rgba(0,0,0,0.0), rgba(0,0,0,0.7));
+  background: radial-gradient(10px 10px, circle, rgba(0,0,0,0.0), rgba(0,0,0,0.7));
+}
+
+.circle(@c) {
+  display: block;
+  background: @c;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 0;
+}
+
+.modra {
+	.circle(#0000ff);
+}
+
+.cervena {
+	.circle(#ff0000);
+}
+
+.zlta {
+	.circle(yellow);
+}
+
+.zelena {
+	.circle(#00FF00);
+}
+
+.oranzova {
+	.circle(orange);
+}
+
+@-webkit-keyframes gulaAnim {
+	0% { .modra; }
+	20% { .zelena; }
+	40% { .oranzova; }
+	60% { .cervena;}
+	80% { .zlta; }
+	100% { .modra; }
+}
+
+@keyframes gulaAnim {
+	0% { .modra; }
+	20% { .zelena; }
+	40% { .oranzova; }
+	60% { .cervena;}
+	80% { .zlta; }
+	100% { .modra; }
+}
+
+.gula1 {
+	animation-name: gulaAnim;
+	animation-iteration-count: infinite;
+	animation-duration: 10s;
+	-webkit-animation-name: gulaAnim;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-duration: 10s;
+}
+
+// darcek
+
+#container {
+    padding:80px;
+    position: relative;
+}
+
+#d2 {
+    left: 300px;
+	top: 80px;
+position: absolute;		
+}
+
+.xmasgift {
+    position:relative;
+    width:100px;
+}
+
+.xmasgift:before {
+
+}
+
+.xmasgift:after {
+    
+}
+
+.xmasgift .box {
+    position:relative;
+    width:100px;
+    height:60px;
+    background-color:#d6ecfa;
+    background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, rgb(115,0,17)),
+    color-stop(0.61, rgb(184,0,31))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(115,0,17) 0%,
+        rgb(184,0,31) 61%
+    );
+    z-index:1;
+}
+
+.xmasgift .box:before,
+.xmasgift .box:after {
+    display:block;
+    content:'';
+    background-color:#5555FF;
+    width:30px;
+    height:70px;
+    position:absolute;
+}
+
+.xmasgift .box:before {
+    top:0;
+    left:-25px;
+    -webkit-transform: rotate(-8deg);
+    -o-transform: rotate(-8deg);
+    -moz-transform: rotate(-8deg);
+    transform: rotate(-8deg);
+}
+
+.xmasgift .box:after {
+    top:0;
+    right:-25px;
+    -webkit-transform: rotate(8deg);
+    -o-transform: rotate(8deg);
+    -moz-transform: rotate(8deg);
+    transform: rotate(8deg);
+}
+
+.xmasgift .cover {
+    position:relative;
+    width:100px;
+    height:40px;
+    background-color:#c00;
+    z-index:1;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(168,0,31)),
+        color-stop(0.25, rgb(194,0,32)),
+        color-stop(0.25, rgb(166,0,28)),
+        color-stop(0.91, rgb(153,0,33)),
+        color-stop(0.96, rgb(143,0,29))
+    );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(168,0,31) 0%,
+        rgb(194,0,32) 25%,
+        rgb(166,0,28) 25%,
+        rgb(153,0,33) 91%,
+        rgb(143,0,29) 96%
+    );
+    -moz-box-shadow:0 1px 3px rgba(0,0,0, 0.25);
+    -webkit-box-shadow:0 1px 3px rgba(0,0,0, 0.25);
+    box-shadow:0 1px 3px rgba(0,0,0, 0.25);
+    z-index:2;
+}
+
+.xmasgift .cover:before,
+.xmasgift .cover:after {
+    display:block;
+    content:'';
+    background-color:#5555FF;
+    width:30px;
+    height:50px;
+    position:absolute;
+}
+
+.xmasgift .cover:before {
+    top:-10px;
+    left:-25px;
+    -webkit-transform: rotate(25deg);
+    -o-transform: rotate(25deg);
+    -moz-transform: rotate(25deg);
+    transform: rotate(25deg);
+}
+
+.xmasgift .cover:after{
+    top:-10px;
+    right:-25px;
+    -webkit-transform: rotate(-25deg);
+    -o-transform: rotate(-25deg);
+    -moz-transform: rotate(-25deg);
+    transform: rotate(-25deg);
+}
+
+.xmasgift .wrapping {
+    position:relative;
+}
+
+.xmasgift .wrapping:before {
+    position:absolute;
+    display:block;
+    content:'';
+    background-color:#008000;
+    width:20px;
+    height:60px;
+    top:40px;
+    left:37px;
+    z-index:2;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(9,43,18)),
+        color-stop(0.34, rgb(19,97,39)),
+        color-stop(0.72, rgb(9,84,28)),
+        color-stop(0.91, rgb(22,122,42))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(9,43,18) 0%,
+        rgb(19,97,39) 34%,
+        rgb(9,84,28) 72%,
+        rgb(22,122,42) 91%
+    );
+}
+.xmasgift .wrapping:after{
+    position:absolute;
+    display:block;
+    content:'';
+    background-color:#008000;
+    width:20px;
+    height:42px;
+    top:0px;
+    left:37px;
+    z-index:2;
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(19,97,39)),
+        color-stop(0.3, rgb(22,122,42)),
+        color-stop(0.31, rgb(19,97,39)),
+        color-stop(0.72, rgb(9,84,28)),
+        color-stop(0.91, rgb(29,63,38))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(19,97,39) 34%,
+        rgb(9,84,28) 72%,
+        rgb(29,63,38) 91%
+    );
+}
+
+.xmasgift .ribbon {
+    position:absolute;
+    top:5px;
+    left:42px;
+    background-color:#008000;
+    width:8px;
+    height:10px;
+    z-index:4;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+        background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(0,74,9)),
+        color-stop(0.5, rgb(0,140,23)),
+        color-stop(1, rgb(0,117,20))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(0,74,9) 0%,
+        rgb(0,140,23) 50%,
+        rgb(0,117,20) 100%
+    );
+    -moz-box-shadow:0 2px 1px rgba(0,0,0, 0.3);
+    -webkit-box-shadow:0 2px 1px rgba(0,0,0, 0.3);
+    box-shadow:0 2px 1px rgba(0,0,0, 0.3);
+}
+
+.xmasgift .ribbon:before{
+    content:"";
+    display:block;
+    position:absolute;
+    top:-5px;
+    left:-25px;
+    width:25px;
+    height:20px;
+    background-color:#008000;
+    -webkit-border-radius:5px 10px 10px 5px;
+    -webkit-transform-origin:100% 50%;
+    -webkit-transform: rotate(15deg);
+    
+    -moz-border-radius:5px 10px 10px 5px;
+    -moz-transform-origin:100% 50%;
+    -moz-transform: rotate(15deg);
+}
+.xmasgift .ribbon:after{
+    content:"";
+    display:block;
+    position:absolute;
+    top:-13px;
+    left:8px;
+    width:25px;
+    height:20px;
+    background-color:#008000;
+    -webkit-border-radius:10px 5px 5px 10px;
+    -webkit-transform-origin:100% 50%;
+    -webkit-transform: rotate(-15deg);
+    
+    -moz-border-radius:10px 5px 5px 10px;
+    -moz-transform-origin:100% 50%;
+    -moz-transform: rotate(-15deg);
+}
+
+.xmasgift .ribbon:before,
+.xmasgift .ribbonTail:before {
+    background: -webkit-gradient(
+        linear, 100% 80%, 10% 0%,
+        color-stop(0, rgb(0,74,9)),
+        color-stop(0.8, rgb(0,140,23)),
+        color-stop(1, rgb(0,117,20))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(0,74,9) 0%,
+        rgb(0,140,23) 50%,
+        rgb(0,117,20) 100%
+    );
+}
+
+.xmasgift .ribbon:after,
+.xmasgift .ribbonTail:after {
+    background: -webkit-gradient(
+        linear, 0% 100%, 90% 0%,
+        color-stop(0, rgb(0,74,9)),
+        color-stop(0.8, rgb(0,140,23)),
+        color-stop(1, rgb(0,117,20))
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        rgb(0,74,9) 0%,
+        rgb(0,140,23) 50%,
+        rgb(0,117,20) 100%
+    );
+}
+
+.xmasgift .ribbonTail {
+    position:absolute;
+    top:0px;
+    left:42px;
+    width:5px;
+    height:5px;
+    z-index:3;
+}
+.xmasgift .ribbonTail:before {
+    content:"";
+    display:block;
+    position:absolute;
+    top:10px;
+    left:-25px;
+    width:30px;
+    height:15px;
+    background-color:#008000;
+    -webkit-transform:skew(10deg) rotate(-30deg);
+    -moz-transform:skew(10deg) rotate(-30deg);
+}
+
+
+.xmasgift .ribbonTail:after {
+    content:"";
+    display:block;
+    position:absolute;
+    top:10px;
+    left:5px;
+    width:30px;
+    height:15px;
+    background-color:#008000;
+    -webkit-transform:skew(-10deg) rotate(30deg);
+    -moz-transform:skew(-10deg) rotate(30deg);
+}
+
+.xmasgift:hover .cover,
+.xmasgift:hover .ribbon,
+.xmasgift:hover .ribbonTail,
+.xmasgift:hover:before,
+.xmasgift:hover .wrapping:after {
+    -webkit-transform:translate(0, -40px);
+    -moz-transform:translate(0, -40px);
+}
+
+.xmasgift:hover .message {
+    -webkit-transform:scale(2) translate(0, -32px);
+    -webkit-transition: 0.3s ease-out;
+    opacity:1;
+    
+    -moz-transform:scale(2) translate(0, -32px);
+    -moz-transition: 0.3s ease-out;
+}
+
+.xmasgift .message {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    color:#fff;
+    font-family:Tahoma, Arial, Helvetica, sans-serif;
+    font-size:10px;
+    text-align:center;
+    z-index:0;
+    opacity:0;
+    text-shadow: 0px 0px 10px #FF9721, 0px 0px 1px #FF0000;
+    font-weight:bold;
+}
