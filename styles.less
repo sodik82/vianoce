@@ -17,50 +17,66 @@
 }
 
 .modra {
-	.circle(#0000ff);
+  .circle(#0000ff);
 }
 
 .cervena {
-	.circle(#ff0000);
+  .circle(#ff0000);
 }
 
 .zlta {
-	.circle(yellow);
+  .circle(yellow);
 }
 
 .zelena {
-	.circle(#00FF00);
+  .circle(#00FF00);
 }
 
 .oranzova {
-	.circle(orange);
+  .circle(orange);
 }
 
 @-webkit-keyframes gulaAnim {
-	0% { .modra; }
-	20% { .zelena; }
-	40% { .oranzova; }
-	60% { .cervena;}
-	80% { .zlta; }
-	100% { .modra; }
+  0% { .modra; }
+  20% { .zelena; }
+  40% { .oranzova; }
+  60% { .cervena;}
+  80% { .zlta; }
+  100% { .modra; }
 }
 
 @keyframes gulaAnim {
-	0% { .modra; }
-	20% { .zelena; }
-	40% { .oranzova; }
-	60% { .cervena;}
-	80% { .zlta; }
-	100% { .modra; }
+  0% { .modra; }
+  20% { .zelena; }
+  40% { .oranzova; }
+  60% { .cervena;}
+  80% { .zlta; }
+  100% { .modra; }
 }
 
 .gula1 {
-	animation-name: gulaAnim;
-	animation-iteration-count: infinite;
-	animation-duration: 10s;
-	-webkit-animation-name: gulaAnim;
-	-webkit-animation-iteration-count: infinite;
-	-webkit-animation-duration: 10s;
+  animation-name: gulaAnim;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  -webkit-animation-name: gulaAnim;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 10s;
+}
+
+// dears
+
+.deer {
+  background-image: url("reindeer.png");
+  height: 60px;
+  width: 60px;
+  background-size: 60px 60px;
+  transform: rotate(90deg);
+  position: absolute;
+  margin-left: -30px;
+}
+
+.deer.up {
+  margin-left: -10px;
 }
 
 // darcek
@@ -72,8 +88,8 @@
 
 #d2 {
     left: 300px;
-	top: 80px;
-position: absolute;		
+  top: 80px;
+position: absolute;
 }
 
 .xmasgift {
@@ -86,7 +102,7 @@ position: absolute;
 }
 
 .xmasgift:after {
-    
+
 }
 
 .xmasgift .box {
@@ -296,7 +312,7 @@ position: absolute;
     -webkit-border-radius:5px 10px 10px 5px;
     -webkit-transform-origin:100% 50%;
     -webkit-transform: rotate(15deg);
-    
+
     -moz-border-radius:5px 10px 10px 5px;
     -moz-transform-origin:100% 50%;
     -moz-transform: rotate(15deg);
@@ -313,7 +329,7 @@ position: absolute;
     -webkit-border-radius:10px 5px 5px 10px;
     -webkit-transform-origin:100% 50%;
     -webkit-transform: rotate(-15deg);
-    
+
     -moz-border-radius:10px 5px 5px 10px;
     -moz-transform-origin:100% 50%;
     -moz-transform: rotate(-15deg);
@@ -399,7 +415,7 @@ position: absolute;
     -webkit-transform:scale(2) translate(0, -32px);
     -webkit-transition: 0.3s ease-out;
     opacity:1;
-    
+
     -moz-transform:scale(2) translate(0, -32px);
     -moz-transition: 0.3s ease-out;
 }
