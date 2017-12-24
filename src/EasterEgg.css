@@ -1,0 +1,22 @@
+.sticky-EE {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.EE-Counter {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  width: 3em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+}
+
+.EE-Counter IMG.candle {
+  height: 2em;
+  width: 2em;
+}

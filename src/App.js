@@ -4,6 +4,7 @@ import Stromcek from './Stromcek';
 import Snezenie from './Snezenie';
 import Darceky from './Darceky';
 import Deers from './Deers';
+import EasterEggCounter from './EasterEggCounter';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
         <Snezenie/>
         <Darceky/>
         <Deers/>
+        <EasterEggCounter />
       </div>
     );
   }

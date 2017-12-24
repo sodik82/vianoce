@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+const now = new Date();
+const year = now.getMonth() > 10 ? now.getFullYear() + 1 : now.getFullYear();
+
 class Darceky extends Component {
   render() {
     return (
@@ -18,7 +21,7 @@ class Darceky extends Component {
               <div className="ribbonTail"></div>
               <div className="wrapping">
                   <div className="cover"></div>
-                      <p className="message">2017</p>
+                      <p className="message">{year}</p>
                   <div className="box"></div>
               </div>
           </div>
