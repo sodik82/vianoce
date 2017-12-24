@@ -9,7 +9,7 @@ class Snezenie extends Component {
     return (
       <div className="ground snowCollection">
         <EasterEgg className="photo snowCollection" name="2016" position={{bottom: 0, left: '50px'}}>
-          <img alt="2016" src={ee2016}/>
+          <img alt="2016" src={ee2016} className="EE-image"/>
         </EasterEgg>
       </div>
     );
