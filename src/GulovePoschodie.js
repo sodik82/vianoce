@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
+import EasterEgg from './EasterEgg';
+import ee from './img/2017baby.jpg';
 
 class GulovePoschodie extends Component {
   render() {
-    const { fromX, toX, baseY } = this.props;
-    return (
-      <div>
-        {makeBalls(fromX, toX, baseY)}
-      </div>
-    );
+    const { fromX, toX, baseY, last } = this.props;
+    return <div>{makeBalls(fromX, toX, baseY, last)}</div>;
   }
 
   shouldComponentUpdate() {
@@ -15,22 +13,34 @@ class GulovePoschodie extends Component {
   }
 }
 
-function makeBalls(fromX, toX, baseY) {
+function makeBalls(fromX, toX, baseY, last) {
   const balls = [];
   var count = (toX - fromX) / 80;
-  if (count < 1) { count = 1; }
-  for (var i = 0; i < Math.floor(count); i++) {
+  if (count < 1) {
+    count = 1;
+  }
+  count = Math.floor(count);
+  for (var i = 0; i < count; i++) {
     var x = Math.floor(Math.random() * 40) + fromX + i * 80 + 10;
     var y = baseY;
     var delay = Math.floor(Math.random() * 5);
     var duration = Math.floor(Math.random() * 8) + 7;
-    balls.push(<Ball key={i} x={x} y={y} delay={delay} duration={duration}/>);
+    balls.push(
+      <Ball
+        key={i}
+        x={x}
+        y={y}
+        delay={delay}
+        duration={duration}
+        special={last && i === count - 1}
+      />
+    );
   }
   return balls;
 }
 
 function Ball(props) {
-  const { x,y, delay, duration } = props;
+  const { x, y, delay, duration, special } = props;
   return (
     <div
       className="gula1"
@@ -39,12 +49,17 @@ function Ball(props) {
         left: x + 'px',
         top: y + 'px',
         animationDelay: delay + 's',
-        animationDuration: duration + 's',
-      }}>
-      <div className="tien"/>
+        animationDuration: duration + 's'
+      }}
+    >
+      <div className="tien" />
+      { special &&
+        <EasterEgg name="2017baby" className="sticky-EE" position={{right: 0, bottom: 0}}>
+          <img alt="2017baby" className="EE-image" src={ee} />
+        </EasterEgg>
+      }
     </div>
   );
 }
-
 
 export default GulovePoschodie;

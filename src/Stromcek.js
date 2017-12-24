@@ -88,7 +88,7 @@ class Stromcek extends Component {
             left: '-150px'
           }}
         >
-        <img alt="2017iceland" className="EE-image" src={ee2017}/>
+          <img alt="2017iceland" className="EE-image" src={ee2017} />
         </EasterEgg>
       );
     }
@@ -121,7 +121,12 @@ function makeTree(levels) {
     end = rightX + ',' + rightY + ' ' + end;
     end = centerX + 20 + ',' + rightY + ' ' + end;
     // makeBalls(leftX + 20, rightX - 20, leftY);
-    poschodia.push({ fromX: leftX + 20, toX: rightX - 20, baseY: leftY });
+    poschodia.push({
+      fromX: leftX + 20,
+      toX: rightX - 20,
+      baseY: leftY,
+      last: i === levels - 1
+    });
   }
   // merge "left" and right side
   points += ' ' + end;

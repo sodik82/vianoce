@@ -24,7 +24,7 @@ class EasterEggCounter extends Component {
           name="candle"
           position={{ right: '1em', top: '2em' }}
         >
-          Najdes vsetky {total} skryte darceky?
+          Najdes vsetkych {total} skrytych darcekov?
         </EasterEgg>
       </div>
     );
