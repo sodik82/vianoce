@@ -4,12 +4,12 @@ import ee from './img/2017baby.jpg';
 
 class GulovePoschodie extends Component {
   render() {
-    const { fromX, toX, baseY, last } = this.props;
-    return <div>{makeBalls(fromX, toX, baseY, last)}</div>;
+    const { fromX, toX, baseY, last, ratio } = this.props;
+    return <div>{makeBalls(fromX * ratio, toX * ratio, baseY * ratio, last)}</div>;
   }
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate(nextProps) {
+    return this.props.ratio !== nextProps.ratio;
   }
 }
 
@@ -39,6 +39,7 @@ function makeBalls(fromX, toX, baseY, last) {
   return balls;
 }
 
+const SIZE = undefined;
 function Ball(props) {
   const { x, y, delay, duration, special } = props;
   return (
@@ -48,6 +49,8 @@ function Ball(props) {
         position: 'absolute',
         left: x + 'px',
         top: y + 'px',
+        width: SIZE,
+        height: SIZE,
         animationDelay: delay + 's',
         animationDuration: duration + 's'
       }}

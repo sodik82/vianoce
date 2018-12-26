@@ -22,5 +22,6 @@
 }
 
 .EE-image {
-  width: 400px;
+  width: 50vw;
+  max-width: 400px;
 }

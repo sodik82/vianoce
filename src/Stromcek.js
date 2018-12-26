@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withContentRect } from 'react-measure';
 
 import GulovePoschodie from './GulovePoschodie';
 import Star, { SIZE } from './Star';
@@ -6,6 +7,12 @@ import EasterEgg from './EasterEgg';
 import ee2017 from './img/2017iceland.JPG';
 
 const zelanie = 'StastneVesele';
+
+function computeRatio(contentRect) {
+  const { width } = contentRect.bounds;
+  const ratio = width / 640 || 0;
+  return Math.min(1, ratio);
+}
 
 class Stromcek extends Component {
   constructor(props) {
@@ -17,11 +24,13 @@ class Stromcek extends Component {
   }
 
   render() {
+    const { measureRef, contentRect } = this.props;
+    const ratio = computeRatio(contentRect);
     const { tree, penX, penY, poschodia } = makeTree(6);
     return (
       <div className="canvas">
-        <div className="Stromcek">
-          <svg xmlns="http://www.w3.org/2000/svg">
+        <div className="Stromcek" ref={measureRef}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 450">
             <polygon points={tree} style={{ fill: 'green' }} />
             <rect
               x={penX}
@@ -32,16 +41,17 @@ class Stromcek extends Component {
             />
           </svg>
         </div>
-        {poschodia.map((p, i) => <GulovePoschodie {...p} key={i} />)}
+        {poschodia.map((p, i) => <GulovePoschodie {...p} ratio={ratio} key={i} />)}
         {this.state.stars}
         {this.state.podpis && (
           <svg
+            viewBox="0 0 300 150"
             style={{
               position: 'absolute',
-              top: '250px',
-              left: '110px',
-              width: '300px',
-              height: '150px',
+              top: (250 * ratio) + 'px',
+              left: (110 * ratio) + 'px',
+              width: (300 * ratio) + 'px',
+              height: (150 * ratio) + 'px',
               zIndex: 10
             }}
             xmlns="http://www.w3.org/2000/svg"
@@ -61,16 +71,18 @@ class Stromcek extends Component {
 
   tick(idx) {
     console.log('tick', idx);
+    const { contentRect } = this.props;
+    const ratio = computeRatio(contentRect);
     var name = 'star' + idx;
     if (idx >= zelanie.length) {
       this.setState({ podpis: true });
       return;
     }
     const { stars } = this.state;
-    const x = compX(idx) - 20;
-    const y = compY(idx) - 20;
+    const x = (compX(idx) - 20) * ratio;
+    const y = (compY(idx) - 20) * ratio;
     stars.push(
-      <Star key={name} text={zelanie.charAt(idx)} color="yellow" x={x} y={y} />
+      <Star key={name} text={zelanie.charAt(idx)} color="yellow" x={x} y={y} ratio={ratio} />
     );
     if (idx === 0) {
       stars.push(
@@ -97,7 +109,7 @@ class Stromcek extends Component {
   }
 
   componentDidMount() {
-    this.tick(0);
+    setTimeout(() => this.tick(0), 500);
   }
 }
 
@@ -152,4 +164,4 @@ function compY(idx) {
   return Math.floor(50 + Math.pow(Math.floor((idx + 1) / 2), 1.1) * 50);
 }
 
-export default Stromcek;
+export default withContentRect('bounds')(Stromcek);
