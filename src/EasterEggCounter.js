@@ -18,7 +18,7 @@ class EasterEggCounter extends Component {
     const { count, total } = this.state;
     return (
       <div className="EE-Counter">
-        {count} <img src={candle} alt="candle" className="candle" />
+        <span>{count} / {total}</span> <img src={candle} alt="candle" className="candle" />
         <EasterEgg
           className="sticky-EE"
           name="candle"

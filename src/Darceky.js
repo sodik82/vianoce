@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EasterEgg from './EasterEgg';
+import ee from './img/2018vianoce.jpg';
 
 const now = new Date();
 const year = now.getMonth() > 10 ? now.getFullYear() + 1 : now.getFullYear();
@@ -16,6 +17,9 @@ class Darceky extends Component {
                       <p className="message">PF</p>
                   <div className="box"></div>
               </div>
+              <EasterEgg name="gift-1" className="sticky-EE" position={{left: -30, bottom: 70}}>
+                <img alt="2018vianoce" className="EE-image" src={ee} />
+              </EasterEgg>
           </div>
           <div className="xmasgift" id="d2">
               <div className="ribbon"></div>
