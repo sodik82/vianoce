@@ -29,7 +29,7 @@ class EasterEgg extends Component {
   }
 
   show = () => {
-    console.log('show!');
+    console.log('show!', this.props.name);
     ga('send', 'event', 'EasterEgg', this.props.name);
     this.setState({ visible: true });
     getCounter().onVisit(this.props.name);

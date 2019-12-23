@@ -14,10 +14,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Kometa />
-        <Stromcek />
-        {!dev && <Snezenie />}
-        <Darceky />
+        <div className="App-container">
+          <Kometa />
+          <Stromcek />
+          {!dev && <Snezenie />}
+          <Darceky />
+        </div>
         <Deers />
         <EasterEggCounter />
       </div>
