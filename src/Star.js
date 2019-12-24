@@ -7,7 +7,7 @@ class Star extends Component {
     const { text, color, x, y, ratio } = this.props;
     return (
       <div
-        id="star"
+        className="star"
         style={{
           position: 'absolute',
           left: x + 'px',

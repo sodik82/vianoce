@@ -19,7 +19,7 @@ class Stromcek extends Component {
     super(props);
     this.state = {
       stars: [],
-      podpis: false
+      podpis: false,
     };
   }
 
@@ -41,18 +41,41 @@ class Stromcek extends Component {
             />
           </svg>
         </div>
-        {poschodia.map((p, i) => <GulovePoschodie {...p} ratio={ratio} key={i} />)}
-        {this.state.stars}
+        {poschodia.map((p, i) => (
+          <GulovePoschodie {...p} ratio={ratio} key={i} />
+        ))}
+        {this.state.stars.map(sp =>
+          sp.egg ? (
+            <EasterEgg
+              key="EE"
+              name="2017iceland"
+              style={{
+                position: 'absolute',
+                left: sp.x + 'px',
+                top: sp.y + 'px',
+                width: SIZE,
+                height: SIZE,
+              }}
+              position={{
+                left: '-150px',
+              }}
+            >
+              <img alt="2017iceland" className="EE-image" src={ee2017} />
+            </EasterEgg>
+          ) : (
+            <Star color="yellow" {...sp} />
+          )
+        )}
         {this.state.podpis && (
           <svg
             viewBox="0 0 300 150"
             style={{
               position: 'absolute',
-              top: (250 * ratio) + 'px',
-              left: (110 * ratio) + 'px',
-              width: (300 * ratio) + 'px',
-              height: (150 * ratio) + 'px',
-              zIndex: 10
+              top: 250 * ratio + 'px',
+              left: 110 * ratio + 'px',
+              width: 300 * ratio + 'px',
+              height: 150 * ratio + 'px',
+              zIndex: 10,
             }}
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
@@ -81,28 +104,9 @@ class Stromcek extends Component {
     const { stars } = this.state;
     const x = (compX(idx) - 20) * ratio;
     const y = (compY(idx) - 20) * ratio;
-    stars.push(
-      <Star key={name} text={zelanie.charAt(idx)} color="yellow" x={x} y={y} ratio={ratio} />
-    );
+    stars.push({ key: name, text: zelanie.charAt(idx), x, y, ratio });
     if (idx === 0) {
-      stars.push(
-        <EasterEgg
-          key="EE"
-          name="2017iceland"
-          style={{
-            position: 'absolute',
-            left: x + 'px',
-            top: y + 'px',
-            width: SIZE,
-            height: SIZE
-          }}
-          position={{
-            left: '-150px'
-          }}
-        >
-          <img alt="2017iceland" className="EE-image" src={ee2017} />
-        </EasterEgg>
-      );
+      stars.push({ egg: 1, x, y });
     }
     this.setState({ stars });
     setTimeout(() => this.tick(idx + 1), 700);
@@ -137,7 +141,7 @@ function makeTree(levels) {
       fromX: leftX + 20,
       toX: rightX - 20,
       baseY: leftY,
-      last: i === levels - 1
+      last: i === levels - 1,
     });
   }
   // merge "left" and right side
@@ -146,7 +150,7 @@ function makeTree(levels) {
     tree: points,
     penX: '' + (compX(0) - 20),
     penY: '' + compY(idx),
-    poschodia
+    poschodia,
   };
 }
 
