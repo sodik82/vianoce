@@ -3,22 +3,26 @@ import React, { Component } from 'react';
 import './EasterEgg.css';
 import EasterEgg from './EasterEgg';
 import candle from './img/candle.svg';
+import eeFinal from './img/2020vianoce.jpg';
 
 let instance;
 
 class EasterEggCounter extends Component {
   constructor(props) {
     super(props);
-    this.state = { count: 0, total: 0 };
+    this.state = { count: 0, total: 0, showFinal: false };
     this.visited = {}; // map of visited EE
     instance = this;
   }
 
   render() {
-    const { count, total } = this.state;
+    const { count, total, showFinal } = this.state;
     return (
       <div className="EE-Counter">
-        <span>{count} / {total}</span> <img src={candle} alt="candle" className="candle" />
+        <span>
+          {count} / {total}
+        </span>{' '}
+        <img src={candle} alt="candle" className="candle" />
         <EasterEgg
           className="sticky-EE"
           name="candle"
@@ -26,6 +30,9 @@ class EasterEggCounter extends Component {
         >
           Najdes vsetkych {total} skrytych darcekov?
         </EasterEgg>
+        {showFinal && (
+          <img alt="finalEE" className="EE-final-image" src={eeFinal} />
+        )}
       </div>
     );
   }
@@ -37,9 +44,14 @@ class EasterEggCounter extends Component {
 
   onVisit(eeName) {
     this.visited[eeName] = true;
+    const count = Object.keys(this.visited).filter((k) => this.visited[k])
+      .length;
     this.setState({
-      count: Object.keys(this.visited).filter(k => this.visited[k]).length
+      count,
     });
+    if (count === this.state.total) {
+      setTimeout(() => this.setState({ showFinal: true }), 1500);
+    }
   }
 }
 

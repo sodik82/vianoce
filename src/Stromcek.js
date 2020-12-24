@@ -5,6 +5,7 @@ import GulovePoschodie from './GulovePoschodie';
 import Star, { SIZE } from './Star';
 import EasterEgg from './EasterEgg';
 import ee2017 from './img/2017iceland.JPG';
+import ee2020 from './img/2020brusko.jpg';
 
 const zelanie = 'StastneVesele';
 
@@ -40,11 +41,19 @@ class Stromcek extends Component {
               style={{ fill: 'brown' }}
             />
           </svg>
+          <EasterEgg
+            name="2020brusko"
+            className="sticky-EE"
+            style={{ right: '50%', top: 'auto', left: 'auto', height: 40, width: 40}}
+            position={{ right: 0, bottom: 0 }}
+          >
+            <img alt="2020brusko" className="EE-image" src={ee2020} />
+          </EasterEgg>
         </div>
         {poschodia.map((p, i) => (
           <GulovePoschodie {...p} ratio={ratio} key={i} />
         ))}
-        {this.state.stars.map(sp =>
+        {this.state.stars.map((sp) =>
           sp.egg ? (
             <EasterEgg
               key="EE"
