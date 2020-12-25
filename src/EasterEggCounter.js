@@ -4,6 +4,7 @@ import './EasterEgg.css';
 import EasterEgg from './EasterEgg';
 import candle from './img/candle.svg';
 import eeFinal from './img/2020vianoce.jpg';
+import { reportEG } from './ga';
 
 let instance;
 
@@ -42,14 +43,22 @@ class EasterEggCounter extends Component {
     this.setState({ total: Object.keys(this.visited).length });
   }
 
+  count() {
+    return Object.keys(this.visited).filter((k) => this.visited[k]).length;
+  }
+
   onVisit(eeName) {
+    const previousCount = this.count();
     this.visited[eeName] = true;
-    const count = Object.keys(this.visited).filter((k) => this.visited[k])
-      .length;
+    const count = this.count();
+    if (previousCount === count) {
+      return;
+    }
     this.setState({
       count,
     });
     if (count === this.state.total) {
+      reportEG('FINAL');
       setTimeout(() => this.setState({ showFinal: true }), 1500);
     }
   }

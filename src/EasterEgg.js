@@ -1,7 +1,7 @@
-/* globals ga */
 import React, { Component } from 'react';
 
 import { getCounter } from './EasterEggCounter';
+import { reportEG } from './ga';
 
 class EasterEgg extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class EasterEgg extends Component {
 
   show = () => {
     console.log('show!', this.props.name);
-    ga('send', 'event', 'EasterEgg', this.props.name);
+    reportEG(this.props.name);
     this.setState({ visible: true });
     getCounter().onVisit(this.props.name);
   };
