@@ -9,28 +9,32 @@ class Darceky extends Component {
   render() {
     return (
       <div id="container">
-          <div className="xmasgift">
-              <div className="ribbon"></div>
-              <div className="ribbonTail"></div>
-              <div className="wrapping">
-                  <div className="cover"></div>
-                      <p className="message">PF</p>
-                  <div className="box"></div>
-              </div>
-              <EasterEgg name="gift-1" className="sticky-EE" position={{left: -30, bottom: 70}}>
-                <img alt="2018vianoce" className="EE-image" src={ee} />
-              </EasterEgg>
+        <div className="xmasgift">
+          <div className="ribbon"></div>
+          <div className="ribbonTail"></div>
+          <div className="wrapping">
+            <div className="cover"></div>
+            <p className="message">PF</p>
+            <div className="box"></div>
           </div>
-          <div className="xmasgift" id="d2">
-              <div className="ribbon"></div>
-              <div className="ribbonTail"></div>
-              <div className="wrapping">
-                  <div className="cover"></div>
-                      <p className="message">{year}</p>
-                  <div className="box"></div>
-              </div>
-              <EasterEgg name="gift" className="sticky-EE"/>
+          <EasterEgg
+            name="gift-1"
+            className="sticky-EE"
+            position={{ left: -30, bottom: 70 }}
+          >
+            <img alt="2018vianoce" className="EE-image" src={ee} />
+          </EasterEgg>
+        </div>
+        <div className="xmasgift" id="d2">
+          <div className="ribbon"></div>
+          <div className="ribbonTail"></div>
+          <div className="wrapping">
+            <div className="cover"></div>
+            <p className="message">{year}</p>
+            <div className="box"></div>
           </div>
+          <EasterEgg name="gift" className="sticky-EE" />
+        </div>
       </div>
     );
   }
