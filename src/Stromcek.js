@@ -123,7 +123,7 @@ class Stromcek extends Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.tick(0), 500);
+    setTimeout(() => this.tick(0), 1000);
   }
 }
 

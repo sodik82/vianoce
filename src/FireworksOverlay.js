@@ -19,10 +19,10 @@ export const FireworksOverlay = ({ enabled }) => {
   };
 
   const eeStyle = {
-    position: 'absolute',
+    position: 'fixed',
     bottom: 0,
     left: '40%',
-    height: 40,
+    height: 30,
     width: '20%',
     // background: 'red',
   };
