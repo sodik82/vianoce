@@ -103,11 +103,12 @@ class Stromcek extends Component {
 
   tick(idx) {
     console.log('tick', idx);
-    const { contentRect } = this.props;
+    const { contentRect, onFinish } = this.props;
     const ratio = computeRatio(contentRect);
     var name = 'star' + idx;
     if (idx >= zelanie.length) {
       this.setState({ podpis: true });
+      onFinish();
       return;
     }
     const { stars } = this.state;

@@ -11,7 +11,7 @@ class EasterEgg extends Component {
 
   render() {
     const { className, position, style } = this.props;
-    const inStyle = Object.assign({ position: 'absolute' }, position);
+    const inStyle = Object.assign({ position: 'absolute', zIndex: 200 }, position);
     return (
       <div
         className={className}

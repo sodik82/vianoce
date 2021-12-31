@@ -1,6 +1,7 @@
 .App {
   position: relative;
   overflow: hidden;
+  min-height: 100vh;
 }
 .App-container {
   margin: 0 auto;
