@@ -5,7 +5,9 @@ import ee from './img/2017baby.jpg';
 class GulovePoschodie extends Component {
   render() {
     const { fromX, toX, baseY, last, ratio } = this.props;
-    return <div>{makeBalls(fromX * ratio, toX * ratio, baseY * ratio, last)}</div>;
+    return (
+      <div>{makeBalls(fromX * ratio, toX * ratio, baseY * ratio, last)}</div>
+    );
   }
 
   shouldComponentUpdate(nextProps) {
@@ -52,15 +54,20 @@ function Ball(props) {
         width: SIZE,
         height: SIZE,
         animationDelay: delay + 's',
-        animationDuration: duration + 's'
+        animationDuration: duration + 's',
       }}
     >
       <div className="tien" />
-      { special &&
-        <EasterEgg name="2017baby" className="sticky-EE" position={{right: 0, bottom: 0}}>
+      {special && (
+        <EasterEgg
+          name="2017baby"
+          className="sticky-EE"
+          position={{ right: 0, bottom: 0 }}
+          text="2017"
+        >
           <img alt="2017baby" className="EE-image" src={ee} />
         </EasterEgg>
-      }
+      )}
     </div>
   );
 }

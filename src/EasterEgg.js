@@ -10,8 +10,11 @@ class EasterEgg extends Component {
   }
 
   render() {
-    const { className, position, style } = this.props;
-    const inStyle = Object.assign({ position: 'absolute', zIndex: 200 }, position);
+    const { className, position, style, text, textStyle = {} } = this.props;
+    const inStyle = Object.assign(
+      { position: 'absolute', zIndex: 200 },
+      position
+    );
     return (
       <div
         className={className}
@@ -19,7 +22,16 @@ class EasterEgg extends Component {
         onMouseEnter={this.show}
         onMouseLeave={this.hide}
       >
-        {this.state.visible && <div style={inStyle}>{this.props.children}</div>}
+        {this.state.visible && (
+          <div style={inStyle}>
+            {text && (
+              <div style={textStyle} className="EE-text">
+                {text}
+              </div>
+            )}
+            {this.props.children}
+          </div>
+        )}
       </div>
     );
   }

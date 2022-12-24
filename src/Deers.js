@@ -20,6 +20,7 @@ class Deers extends Component {
           name="deer"
           className="sticky-EE"
           position={{ left: -30, bottom: 70 }}
+          text="2018"
         >
           <img alt="2018risko" className="EE-image" src={eeImg} />
         </EasterEgg>

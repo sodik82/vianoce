@@ -35,6 +35,7 @@ export const FireworksOverlay = ({ enabled }) => {
           name="fire"
           className="sticky-EE"
           position={{ bottom: '1em', left: '-4em', zIndex: 200 }}
+          text="2021"
         >
           <img alt="2021sneh" className="EE-image" src={ee} />
         </EasterEgg>

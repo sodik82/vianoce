@@ -13,6 +13,7 @@ const Kometa = () => {
         className="photo"
         name="2019risko"
         position={{ top: 0, left: '-50px' }}
+        text="2019"
       >
         <img alt="2019risko" src={ee2019} className="EE-image" />
       </EasterEgg>

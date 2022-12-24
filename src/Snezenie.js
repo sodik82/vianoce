@@ -8,15 +8,20 @@ class Snezenie extends Component {
   render() {
     return (
       <div className="ground snowCollection">
-        <EasterEgg className="photo snowCollection" name="2016" position={{bottom: 0, left: '50px'}}>
-          <img alt="2016" src={ee2016} className="EE-image"/>
+        <EasterEgg
+          className="photo snowCollection"
+          name="2016"
+          position={{ bottom: 0, left: '50px' }}
+          text="2016"
+        >
+          <img alt="2016" src={ee2016} className="EE-image" />
         </EasterEgg>
       </div>
     );
   }
 
   componentDidMount() {
-    $(document).snowfall({collection : '.snowCollection', flakeCount : 250});
+    $(document).snowfall({ collection: '.snowCollection', flakeCount: 250 });
   }
 }
 

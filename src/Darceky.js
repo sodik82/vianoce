@@ -21,6 +21,7 @@ class Darceky extends Component {
             name="gift-1"
             className="sticky-EE"
             position={{ left: -30, bottom: '6em' }}
+            text="2018"
           >
             <img alt="2018vianoce" className="EE-image" src={ee} />
           </EasterEgg>

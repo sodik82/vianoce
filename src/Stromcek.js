@@ -44,7 +44,18 @@ class Stromcek extends Component {
           <EasterEgg
             name="2020brusko"
             className="sticky-EE"
-            style={{ right: '50%', top: 'auto', left: 'auto', height: 40, width: 40}}
+            style={{
+              right: '50%',
+              top: 'auto',
+              left: 'auto',
+              bottom: 0,
+              height: 40,
+              width: 40,
+            }}
+            textStyle={{
+              bottom: 0
+            }}
+            text="2020"
             position={{ right: 0, bottom: 0 }}
           >
             <img alt="2020brusko" className="EE-image" src={ee2020} />
@@ -65,6 +76,7 @@ class Stromcek extends Component {
                 width: SIZE,
                 height: SIZE,
               }}
+              text="2017"
               position={{
                 left: '-150px',
               }}

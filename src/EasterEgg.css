@@ -26,6 +26,20 @@
   max-width: 400px;
 }
 
+.EE-text {
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  font-style: italic;
+  font-weight: bold;
+  color: #fff; 
+  display: inline;
+  padding: 0.5rem;
+  text-shadow: 0 1px 0 black;
+  
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .EE-final-image {
   position: fixed;
   top: 3em;
