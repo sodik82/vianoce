@@ -7,6 +7,7 @@ import { FireworksOverlay } from './FireworksOverlay';
 import Kometa from './Kometa';
 import Snezenie from './Snezenie';
 import Stromcek from './Stromcek';
+import { Train } from './Train';
 
 const dev = !!window.location.search;
 
@@ -19,6 +20,7 @@ function App() {
         <Stromcek onFinish={() => setFwEnabled(true)} />
         {!dev && <Snezenie />}
         <Darceky />
+        <Train />
       </div>
       <Deers />
       <FireworksOverlay enabled={fwEnabled} />
