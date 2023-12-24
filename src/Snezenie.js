@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import EasterEgg from './EasterEgg';
 import ee2016 from './img/2016.JPG';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 class Snezenie extends Component {
   render() {
     return (
@@ -21,7 +23,9 @@ class Snezenie extends Component {
   }
 
   componentDidMount() {
-    $(document).snowfall({ collection: '.snowCollection', flakeCount: 250 });
+    if (isProduction) {
+      $(document).snowfall({ collection: '.snowCollection', flakeCount: 250 });
+    }
   }
 }
 
