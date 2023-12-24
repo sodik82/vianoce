@@ -1,0 +1,52 @@
+.maze-enter {
+  width: 3em;
+  height: 3em;
+  position: absolute;
+  left: 50%;
+  transform: translate(-1.5em, -100px);
+}
+
+.maze-exit {
+  width: 1em;
+  height: 1em;
+  margin-left: 0.5em;
+  margin-top: -0.5em;
+}
+
+.maze-container {
+  position: absolute;
+  top: 1em;
+  bottom: 1em;
+  left: 0;
+  right: 0;
+}
+
+.maze-container-inner {
+  margin: 0 auto;
+  max-width: 640px;
+}
+
+:root {
+  --cell-size: 50px;
+}
+
+.maze-grid {
+  display: grid;
+  grid-template-columns: repeat(5, var(--cell-size));
+  grid-template-rows: repeat(5, var(--cell-size));
+}
+
+.wall {
+  background-color: #000;
+  border: 1px solid #fff;
+}
+
+.path {
+  background-color: #ccc;
+  border: 1px solid #000;
+}
+
+.sprite {
+  width: var(--cell-size);
+  height: var(--cell-size);
+}
