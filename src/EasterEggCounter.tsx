@@ -14,10 +14,13 @@ interface State {
   showFinal: boolean;
 }
 
-class EasterEggCounter extends Component<any, State> {
+interface Props {
+}
+
+class EasterEggCounter extends Component<Props, State> {
   private visited: Record<string, boolean> = {}; // map of visited EE
 
-  private constructor(props: any) {
+  private constructor(props: Props) {
     super(props);
     this.state = { count: 0, total: 0, showFinal: false };
     instance = this;
@@ -62,6 +65,7 @@ class EasterEggCounter extends Component<any, State> {
     if (previousCount === count) {
       return;
     }
+    reportEG(eeName);
     this.setState((prevState) => ({
       count,
     }));
