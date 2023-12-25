@@ -11,8 +11,6 @@ import { Train } from './Train';
 import { MazeEntrance } from './maze/MazeEntrance';
 import { Maze } from './maze/Maze';
 
-const dev = !!window.location.search;
-
 function App() {
   const [fwEnabled, setFwEnabled] = useState(false);
   const [maze, setMaze] = useState(false);
@@ -21,7 +19,7 @@ function App() {
       <div className={'App-container ' + (maze && 'Maze')}>
         <Kometa />
         <Stromcek onFinish={() => setFwEnabled(true)} />
-        {!dev && <Snezenie />}
+        <Snezenie active={!maze} />
         <Darceky />
         <MazeEntrance onEnter={() => setMaze(true)} />
         <Train />
