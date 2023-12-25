@@ -26,6 +26,16 @@
   max-width: 640px;
 }
 
+.maze-ee {
+  position: absolute;
+  top: 2.5em;
+  left: 1em;
+}
+
+.maze-ee-close {
+  float: right;
+}
+
 :root {
   --cell-size: 50px;
 }

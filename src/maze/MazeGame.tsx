@@ -1,6 +1,8 @@
 import * as React from 'react';
 import treeImg from '../img/tree.png';
 import santaImg from '../img/santa.png';
+import iglu from '../img/2023iglu.jpg';
+import { MazeEsterEgg } from './MazeEsterEgg';
 
 interface Props {}
 
@@ -16,17 +18,29 @@ enum Direction {
   DOWN,
 }
 
+interface EEDefinition {
+  name: string;
+  text: string;
+  img: string;
+}
+
 interface MazeCell {
   isWall: boolean;
+  visited: boolean;
   sprite?: Sprite;
+  egg?: EEDefinition;
 }
 
 type Maze = MazeCell[][];
 
+const ees: Record<number, EEDefinition> = {
+  101: { name: '2023iglu', text: '2023', img: iglu },
+};
+
 const generateMaze = () => {
   const mazeTiles: number[][] = [
     [0, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1],
+    [1, 101, 0, 0, 1],
     [1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1],
     [1, 1, 1, 0, 101],
@@ -40,7 +54,9 @@ const generateMaze = () => {
       const tile = mazeTiles[i][j];
       const mazeTile: MazeCell = {
         isWall: tile === 1,
+        visited: false,
         sprite: tile > 100 ? Sprite.TREE : undefined,
+        egg: ees[tile],
       };
       if (i === 0 && j === 0) {
         mazeTile.sprite = Sprite.SANTA;
@@ -52,14 +68,24 @@ const generateMaze = () => {
   return maze;
 };
 
-const renderSprite = (sprite: Sprite | undefined) => {
-  switch (sprite) {
+const renderSprite = (cell: MazeCell) => {
+  let el = null;
+  switch (cell.sprite) {
     case Sprite.TREE:
-      return <img src={treeImg} className="sprite" alt="Tree" />;
+      el = <img src={treeImg} className="sprite" alt="Tree" />;
+      break;
     case Sprite.SANTA:
-      return <img src={santaImg} className="sprite" alt="Santa" />;
+      el = <img src={santaImg} className="sprite" alt="Santa" />;
+      break;
   }
-  return null;
+  if (cell.egg) {
+    el = (
+      <MazeEsterEgg {...cell.egg} visited={cell.visited}>
+        {el}
+      </MazeEsterEgg>
+    );
+  }
+  return el;
 };
 
 const renderMaze = (maze: Maze) => {
@@ -69,7 +95,7 @@ const renderMaze = (maze: Maze) => {
       const className = isWall ? 'wall' : 'path';
       return (
         <div key={`cell-${x}-${y}`} className={className}>
-          {renderSprite(cell.sprite)}
+          {renderSprite(cell)}
         </div>
       );
     });
@@ -133,7 +159,9 @@ const moveSantaInDirection = (maze: Maze, direction: Direction): MoveResult => {
   } else {
     // Update the maze with Santa's new position
     const clonedMaze = cloneMaze(maze);
-    clonedMaze[newPosition[0]][newPosition[1]].sprite = Sprite.SANTA;
+    const cell = clonedMaze[newPosition[0]][newPosition[1]];
+    cell.sprite = Sprite.SANTA;
+    cell.visited = true;
     clonedMaze[oldPosition[0]][oldPosition[1]].sprite = undefined;
     return { maze: clonedMaze, prevCell: newCell };
   }
@@ -149,6 +177,7 @@ function getMazeCell(maze: Maze, pos: number[]): MazeCell | undefined {
 
 export const MazeGame: React.FC<Props> = (props) => {
   const [maze, setMaze] = React.useState(generateMaze());
+  console.log(maze);
   const move = (dir: Direction) =>
     setMaze((m) => moveSantaInDirection(m, dir).maze);
   return (
