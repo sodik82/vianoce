@@ -6,28 +6,34 @@ import candle from './img/candle.svg';
 import eeFinal from './img/2020vianoce.jpg';
 import { reportEG } from './ga';
 
-let instance;
+let instance: EasterEggCounter | null;
 
-class EasterEggCounter extends Component {
-  constructor(props) {
+interface State {
+  count: number;
+  total: number; 
+  showFinal: boolean;
+}
+
+class EasterEggCounter extends Component<any, State> {
+  private visited: Record<string, boolean> = {}; // map of visited EE
+
+  private constructor(props: any) {
     super(props);
     this.state = { count: 0, total: 0, showFinal: false };
-    this.visited = {}; // map of visited EE
     instance = this;
   }
 
-  render() {
+  public render() {
     const { count, total, showFinal } = this.state;
     return (
       <div className="EE-Counter">
-        <span>
-          {count} / {total}
-        </span>{' '}
+        <span>{count} / {total}</span>{' '}
         <img src={candle} alt="candle" className="candle" />
         <EasterEgg
           className="sticky-EE"
           name="candle"
           position={{ right: '1em', top: '2em' }}
+          onVisit={(eeName: string) => this.onVisit(eeName)}
         >
           Najdes vsetkych {total} skrytych darcekov?
         </EasterEgg>
@@ -38,25 +44,28 @@ class EasterEggCounter extends Component {
     );
   }
 
-  register(eeName) {
+  public register(eeName: string): void {
     this.visited[eeName] = false;
-    this.setState({ total: Object.keys(this.visited).length });
+    this.setState((prevState) => ({
+      total: prevState.total + 1,
+    }));
   }
 
-  count() {
-    return Object.keys(this.visited).filter((k) => this.visited[k]).length;
+  private count(): number {
+    return Object.values(this.visited).filter((visited) => visited).length;
   }
 
-  onVisit(eeName) {
-    const previousCount = this.count();
+  public onVisit(eeName: string): void {
+    const previousCount: number = this.count();
     this.visited[eeName] = true;
-    const count = this.count();
+    const count: number = this.count();
     if (previousCount === count) {
       return;
     }
-    this.setState({
+    this.setState((prevState) => ({
       count,
-    });
+    }));
+
     if (count === this.state.total) {
       reportEG('FINAL');
       setTimeout(() => this.setState({ showFinal: true }), 1500);
@@ -64,7 +73,7 @@ class EasterEggCounter extends Component {
   }
 }
 
-export function getCounter() {
+export function getCounter(): EasterEggCounter | null {
   return instance;
 }
 
