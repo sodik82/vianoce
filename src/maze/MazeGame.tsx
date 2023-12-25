@@ -183,10 +183,12 @@ export const MazeGame: React.FC<Props> = (props) => {
   return (
     <div>
       <div className="maze-grid">{renderMaze(maze)}</div>;
-      <div>
+      <div className="controlls">
         <button onClick={() => move(Direction.LEFT)}> Left </button>
-        <button onClick={() => move(Direction.UP)}> Up </button>
-        <button onClick={() => move(Direction.DOWN)}> Down </button>
+        <div className="controlls-up-down">
+          <button onClick={() => move(Direction.UP)}> Up </button>
+          <button onClick={() => move(Direction.DOWN)}> Down </button>
+        </div>
         <button onClick={() => move(Direction.RIGHT)}> Right </button>
       </div>
     </div>

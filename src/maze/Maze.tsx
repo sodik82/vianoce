@@ -10,13 +10,13 @@ interface Props {
 
 export const Maze: React.FC<Props> = (props) => {
   return (
-    <div className={'maze-container' + (props.visible ? '' : 'maze-hidden')}>
+    <div className={'maze-container ' + (props.visible ? '' : 'maze-hidden')}>
       <img
         alt="Maze Exit"
         onClick={props.onExit}
         src={maze}
         className="maze-exit"
-      ></img>
+      /> Back
       <div className="maze-container-inner">
         <MazeGame />
       </div>

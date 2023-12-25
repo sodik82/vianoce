@@ -40,6 +40,15 @@
   float: right;
 }
 
+.controlls {
+  display: flex;
+}
+
+.controlls-up-down {
+  display: flex;
+  flex-direction: column;
+}
+
 :root {
   --cell-size: 50px;
 }
