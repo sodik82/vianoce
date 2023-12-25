@@ -26,9 +26,8 @@ function App() {
         <MazeEntrance onEnter={() => setMaze(true)} />
         <Train />
       </div>
-      {maze ? (
-        <Maze onExit={() => setMaze(false)} />
-      ) : (
+      <Maze visible={maze} onExit={() => setMaze(false)} />
+      {!maze && (
         <Fragment>
           <Deers />
           <FireworksOverlay enabled={fwEnabled} />

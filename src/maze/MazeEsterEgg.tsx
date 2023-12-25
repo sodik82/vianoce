@@ -14,16 +14,19 @@ export const MazeEsterEgg: React.FC<Props> = (props) => {
   React.useEffect(() => {
     getCounter()?.register(name);
   }, [name]);
-  React.useEffect(() => {
-    visited && getCounter()?.onVisit(name);
-  }, [name, visited]);
   const [closed, setClosed] = React.useState(false);
   return (
     <React.Fragment>
       {children}
       {visited && !closed && (
         <div className="maze-ee">
-          <button className="maze-ee-close" onClick={() => setClosed(true)}>
+          <button
+            className="maze-ee-close"
+            onClick={() => {
+              setClosed(true);
+              getCounter()?.onVisit(name);
+            }}
+          >
             X
           </button>
           <div className="EE-text">{text}</div>

@@ -21,6 +21,10 @@
   right: 0;
 }
 
+.maze-hidden {
+  visibility: hidden;
+}
+
 .maze-container-inner {
   margin: 0 auto;
   max-width: 640px;
