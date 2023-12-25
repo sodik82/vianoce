@@ -40,7 +40,7 @@ const ees: Record<number, EEDefinition> = {
 const generateMaze = () => {
   const mazeTiles: number[][] = [
     [0, 0, 1, 1, 1],
-    [1, 101, 0, 0, 1],
+    [1, 0, 0, 0, 1],
     [1, 0, 1, 0, 1],
     [1, 0, 1, 0, 1],
     [1, 1, 1, 0, 101],
