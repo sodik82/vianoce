@@ -15,7 +15,7 @@
 
 .maze-container {
   position: absolute;
-  top: 1em;
+  top: 1.5em;
   bottom: 1em;
   left: 0;
   right: 0;
@@ -56,8 +56,8 @@
 
 .maze-grid {
   display: grid;
-  grid-template-columns: repeat(5, var(--cell-size));
-  grid-template-rows: repeat(5, var(--cell-size));
+  grid-template-columns: repeat(6, var(--cell-size));
+  grid-template-rows: repeat(6, var(--cell-size));
 }
 
 .wall {

@@ -2,6 +2,8 @@ import * as React from 'react';
 import treeImg from '../img/tree.png';
 import santaImg from '../img/santa.png';
 import iglu from '../img/2023iglu.jpg';
+import skola from '../img/2024skola.jpg';
+import vianoce from '../img/2024vianoce.jpg';
 import { MazeEsterEgg } from './MazeEsterEgg';
 
 interface Props {}
@@ -22,6 +24,7 @@ interface EEDefinition {
   name: string;
   text: string;
   img: string;
+  sprite: Sprite;
 }
 
 interface MazeCell {
@@ -34,16 +37,19 @@ interface MazeCell {
 type Maze = MazeCell[][];
 
 const ees: Record<number, EEDefinition> = {
-  101: { name: '2023iglu', text: '2023', img: iglu },
+  101: { name: '2023iglu', text: '2023', img: iglu, sprite: Sprite.TREE },
+  102: { name: '2024skola', text: '2024', img: skola, sprite: Sprite.TREE },
+  103: { name: '2024vianoce', text: '2024', img: vianoce, sprite: Sprite.TREE },
 };
 
 const generateMaze = () => {
   const mazeTiles: number[][] = [
-    [0, 0, 1, 1, 1],
-    [1, 0, 0, 0, 1],
-    [1, 0, 1, 0, 1],
-    [1, 0, 1, 0, 1],
-    [1, 1, 1, 0, 101],
+    [0, 0, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1, 1],
+    [1, 0, 1, 0, 1, 1],
+    [1, 0, 1, 0, 1, 103],
+    [1, 102, 1, 0, 1, 0],
+    [1, 1, 1, 0, 101, 0],
   ];
   const maze: Maze = [];
   for (let i = 0; i < mazeTiles.length; i++) {
@@ -52,11 +58,12 @@ const generateMaze = () => {
         maze[i] = [];
       }
       const tile = mazeTiles[i][j];
+      const egg = ees[tile];
       const mazeTile: MazeCell = {
         isWall: tile === 1,
         visited: false,
-        sprite: tile > 100 ? Sprite.TREE : undefined,
-        egg: ees[tile],
+        sprite: egg ? egg.sprite : undefined,
+        egg,
       };
       if (i === 0 && j === 0) {
         mazeTile.sprite = Sprite.SANTA;
@@ -180,6 +187,39 @@ export const MazeGame: React.FC<Props> = (props) => {
   console.log(maze);
   const move = (dir: Direction) =>
     setMaze((m) => moveSantaInDirection(m, dir).maze);
+
+  React.useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const { key } = event;
+      let direction: Direction;
+  
+      switch (key) {
+        case 'ArrowLeft':
+          direction = Direction.LEFT;
+          break;
+        case 'ArrowUp':
+          direction = Direction.UP;
+          break;
+        case 'ArrowDown':
+          direction = Direction.DOWN;
+          break;
+        case 'ArrowRight':
+          direction = Direction.RIGHT;
+          break;
+        default:
+          return;
+      }
+  
+      event.preventDefault();
+      move(direction);
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Cleanup function to remove event listener on component unmount
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div>
       <div className="maze-grid">{renderMaze(maze)}</div>;
