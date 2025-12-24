@@ -65,10 +65,10 @@ class Stromcek extends Component {
         {poschodia.map((p, i) => (
           <GulovePoschodie {...p} ratio={ratio} key={i} />
         ))}
-        {this.state.stars.map((sp) =>
+        {this.state.stars.map((sp, index) =>
           sp.egg ? (
             <EasterEgg
-              key="EE"
+              key={`egg-${index}`}
               name="2017iceland"
               style={{
                 position: 'absolute',
@@ -85,7 +85,7 @@ class Stromcek extends Component {
               <img alt="2017iceland" className="EE-image" src={ee2017} />
             </EasterEgg>
           ) : (
-            <Star color="yellow" {...sp} />
+            <Star key={sp.id} color="yellow" text={sp.text} x={sp.x} y={sp.y} ratio={sp.ratio} />
           )
         )}
         {this.state.podpis && (
@@ -124,14 +124,14 @@ class Stromcek extends Component {
       onFinish();
       return;
     }
-    const { stars } = this.state;
     const x = (compX(idx) - 20) * ratio;
     const y = (compY(idx) - 20) * ratio;
-    stars.push({ key: name, text: zelanie.charAt(idx), x, y, ratio });
+    const newStars = [...this.state.stars];
+    newStars.push({ id: name, text: zelanie.charAt(idx), x, y, ratio });
     if (idx === 0) {
-      stars.push({ egg: 1, x, y });
+      newStars.push({ egg: 1, x, y });
     }
-    this.setState({ stars });
+    this.setState({ stars: newStars });
     setTimeout(() => this.tick(idx + 1), 700);
   }
 
