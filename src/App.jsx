@@ -6,6 +6,7 @@ import EasterEggCounter from './EasterEggCounter';
 import { FireworksOverlay } from './FireworksOverlay';
 import Kometa from './Kometa';
 import Snezenie from './Snezenie';
+import SnowGlobe from './SnowGlobe';
 import Stromcek from './Stromcek';
 import { Train } from './Train';
 import { MazeEntrance } from './maze/MazeEntrance';
@@ -23,6 +24,7 @@ function App() {
         <Darceky />
         <MazeEntrance onEnter={() => setMaze(true)} />
         <Train />
+        <SnowGlobe />
       </div>
       <Maze visible={maze} onExit={() => setMaze(false)} />
       {!maze && (
