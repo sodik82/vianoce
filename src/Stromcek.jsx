@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 
 import GulovePoschodie from './GulovePoschodie';
 import Star, { SIZE } from './Star';
@@ -14,150 +14,181 @@ function computeRatio(contentRect) {
   return Math.min(1, ratio);
 }
 
-class Stromcek extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stars: [],
-      podpis: false,
-      contentRect: { bounds: { width: 640, height: 450 } },
-    };
-    this.measureRef = React.createRef();
-    this.resizeObserver = null;
-  }
+function Stromcek({ onFinish }) {
+  const [stars, setStars] = useState([]);
+  const [podpis, setPodpis] = useState(false);
+  const [contentRect, setContentRect] = useState({ bounds: { width: 640, height: 450 } });
+  const [currentIndex, setCurrentIndex] = useState(-1);
 
-  render() {
-    const ratio = computeRatio(this.state.contentRect);
-    const { tree, penX, penY, poschodia } = makeTree(6);
-    return (
-      <div className="canvas">
-        <div className="Stromcek" ref={this.measureRef}>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 450">
-            <polygon points={tree} style={{ fill: 'green' }} />
-            <rect
-              x={penX}
-              y={penY}
-              width="40"
-              height="100"
-              style={{ fill: 'brown' }}
-            />
-          </svg>
-          <EasterEgg
-            name="2020brusko"
-            className="sticky-EE"
-            style={{
-              right: '50%',
-              top: 'auto',
-              left: 'auto',
-              bottom: 0,
-              height: 40,
-              width: 40,
-            }}
-            textStyle={{
-              bottom: 0
-            }}
-            text="2020"
-            position={{ right: 0, bottom: 0 }}
-          >
-            <img alt="2020brusko" className="EE-image" src={ee2020} />
-          </EasterEgg>
-        </div>
-        {poschodia.map((p, i) => (
-          <GulovePoschodie {...p} ratio={ratio} key={i} />
-        ))}
-        {this.state.stars.map((sp, index) =>
-          sp.egg ? (
-            <EasterEgg
-              key={`egg-${index}`}
-              name="2017iceland"
-              style={{
-                position: 'absolute',
-                left: sp.x + 'px',
-                top: sp.y + 'px',
-                width: SIZE,
-                height: SIZE,
-              }}
-              text="2017"
-              position={{
-                left: '-150px',
-              }}
-            >
-              <img alt="2017iceland" className="EE-image" src={ee2017} />
-            </EasterEgg>
-          ) : (
-            <Star key={sp.id} color="yellow" text={sp.text} x={sp.x} y={sp.y} ratio={sp.ratio} />
-          )
-        )}
-        {this.state.podpis && (
-          <svg
-            viewBox="0 0 300 150"
-            style={{
-              position: 'absolute',
-              top: 250 * ratio + 'px',
-              left: 110 * ratio + 'px',
-              width: 300 * ratio + 'px',
-              height: 150 * ratio + 'px',
-              zIndex: 10,
-            }}
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-          >
-            <defs>
-              <path id="pathx" d="M75,20 a1,1 0 0,0 100,0" />
-            </defs>
-            <text x="10" y="100" transform="scale(1.5)" style={{ fill: 'red' }}>
-              <textPath xlinkHref="#pathx">Vianoce zela Sodik</textPath>
-            </text>
-          </svg>
-        )}
-      </div>
-    );
-  }
+  const measureRef = useRef(null);
+  const resizeObserverRef = useRef(null);
+  const onFinishRef = useRef(onFinish);
 
-  tick(idx) {
-    console.log('tick', idx);
-    const { onFinish } = this.props;
-    const ratio = computeRatio(this.state.contentRect);
-    var name = 'star' + idx;
-    if (idx >= zelanie.length) {
-      this.setState({ podpis: true });
-      onFinish();
-      return;
-    }
-    const x = (compX(idx) - 20) * ratio;
-    const y = (compY(idx) - 20) * ratio;
-    const newStars = [...this.state.stars];
-    newStars.push({ id: name, text: zelanie.charAt(idx), x, y, ratio });
-    if (idx === 0) {
-      newStars.push({ egg: 1, x, y });
-    }
-    this.setState({ stars: newStars });
-    setTimeout(() => this.tick(idx + 1), 700);
-  }
+  // Keep onFinishRef in sync
+  useEffect(() => {
+    onFinishRef.current = onFinish;
+  }, [onFinish]);
 
-  componentDidMount() {
-    if (this.measureRef.current) {
-      this.resizeObserver = new ResizeObserver(entries => {
+  // Setup ResizeObserver
+  useEffect(() => {
+    if (measureRef.current) {
+      resizeObserverRef.current = new ResizeObserver(entries => {
         for (let entry of entries) {
-          const contentRect = {
+          const newContentRect = {
             bounds: {
               width: entry.contentRect.width,
               height: entry.contentRect.height,
             }
           };
-          this.setState({ contentRect });
+          setContentRect(newContentRect);
         }
       });
-      this.resizeObserver.observe(this.measureRef.current);
+      resizeObserverRef.current.observe(measureRef.current);
     }
-    setTimeout(() => this.tick(0), 1000);
-  }
 
-  componentWillUnmount() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
+    return () => {
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+      }
+    };
+  }, []);
+
+  // Start animation after 1 second, then increment index every 1000ms
+  useEffect(() => {
+    const startTimer = setTimeout(() => {
+      setCurrentIndex(0);
+    }, 1000);
+
+    return () => clearTimeout(startTimer);
+  }, []);
+
+  // Interval to increment index
+  useEffect(() => {
+    if (currentIndex < 0 || currentIndex >= zelanie.length) {
+      return;
     }
-  }
+
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => prev + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  // Add stars based on current index
+  useEffect(() => {
+    if (currentIndex < 0) {
+      return;
+    }
+
+    if (currentIndex >= zelanie.length) {
+      setPodpis(true);
+      onFinishRef.current();
+      return;
+    }
+
+    console.log('tick', currentIndex);
+    const ratio = computeRatio(contentRect);
+    const name = 'star' + currentIndex;
+    const x = (compX(currentIndex) - 20) * ratio;
+    const y = (compY(currentIndex) - 20) * ratio;
+
+    setStars(prevStars => {
+      const newStars = [...prevStars];
+      newStars.push({ id: name, text: zelanie.charAt(currentIndex), x, y, ratio });
+      if (currentIndex === 0) {
+        newStars.push({ egg: 1, x, y });
+      }
+      return newStars;
+    });
+  }, [currentIndex, contentRect]);
+
+  const ratio = computeRatio(contentRect);
+  const { tree, penX, penY, poschodia } = makeTree(6);
+
+  return (
+    <div className="canvas">
+      <div className="Stromcek" ref={measureRef}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 450">
+          <polygon points={tree} style={{ fill: 'green' }} />
+          <rect
+            x={penX}
+            y={penY}
+            width="40"
+            height="100"
+            style={{ fill: 'brown' }}
+          />
+        </svg>
+        <EasterEgg
+          name="2020brusko"
+          className="sticky-EE"
+          style={{
+            right: '50%',
+            top: 'auto',
+            left: 'auto',
+            bottom: 0,
+            height: 40,
+            width: 40,
+          }}
+          textStyle={{
+            bottom: 0
+          }}
+          text="2020"
+          position={{ right: 0, bottom: 0 }}
+        >
+          <img alt="2020brusko" className="EE-image" src={ee2020} />
+        </EasterEgg>
+      </div>
+      {poschodia.map((p, i) => (
+        <GulovePoschodie {...p} ratio={ratio} key={i} />
+      ))}
+      {stars.map((sp, index) =>
+        sp.egg ? (
+          <EasterEgg
+            key={`egg-${index}`}
+            name="2017iceland"
+            style={{
+              position: 'absolute',
+              left: sp.x + 'px',
+              top: sp.y + 'px',
+              width: SIZE,
+              height: SIZE,
+            }}
+            text="2017"
+            position={{
+              left: '-150px',
+            }}
+          >
+            <img alt="2017iceland" className="EE-image" src={ee2017} />
+          </EasterEgg>
+        ) : (
+          <Star key={sp.id} color="yellow" text={sp.text} x={sp.x} y={sp.y} ratio={sp.ratio} />
+        )
+      )}
+      {podpis && (
+        <svg
+          viewBox="0 0 300 150"
+          style={{
+            position: 'absolute',
+            top: 250 * ratio + 'px',
+            left: 110 * ratio + 'px',
+            width: 300 * ratio + 'px',
+            height: 150 * ratio + 'px',
+            zIndex: 10,
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+          version="1.1"
+        >
+          <defs>
+            <path id="pathx" d="M75,20 a1,1 0 0,0 100,0" />
+          </defs>
+          <text x="10" y="100" transform="scale(1.5)" style={{ fill: 'red' }}>
+            <textPath xlinkHref="#pathx">Vianoce zela Sodik</textPath>
+          </text>
+        </svg>
+      )}
+    </div>
+  );
 }
 
 function makeTree(levels) {
