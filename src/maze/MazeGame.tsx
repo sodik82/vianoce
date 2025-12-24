@@ -182,7 +182,7 @@ function getMazeCell(maze: Maze, pos: number[]): MazeCell | undefined {
   return row[pos[1]];
 }
 
-export const MazeGame: React.FC<Props> = (props) => {
+export const MazeGame: React.FC<Props> = () => {
   const [maze, setMaze] = React.useState(generateMaze());
   console.log(maze);
   const move = (dir: Direction) =>

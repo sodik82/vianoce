@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import GulovePoschodie from './GulovePoschodie';
 import Star, { SIZE } from './Star';
