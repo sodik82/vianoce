@@ -1,4 +1,4 @@
-import { Fireworks } from 'fireworks-js/dist/react';
+import { Fireworks } from 'fireworks-js';
 import React, { Fragment } from 'react';
 import EasterEgg from './EasterEgg';
 import ee from './img/2021sneh.jpg';

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withContentRect } from 'react-measure';
 
 import GulovePoschodie from './GulovePoschodie';
 import Star, { SIZE } from './Star';
@@ -21,16 +20,18 @@ class Stromcek extends Component {
     this.state = {
       stars: [],
       podpis: false,
+      contentRect: { bounds: { width: 640, height: 450 } },
     };
+    this.measureRef = React.createRef();
+    this.resizeObserver = null;
   }
 
   render() {
-    const { measureRef, contentRect } = this.props;
-    const ratio = computeRatio(contentRect);
+    const ratio = computeRatio(this.state.contentRect);
     const { tree, penX, penY, poschodia } = makeTree(6);
     return (
       <div className="canvas">
-        <div className="Stromcek" ref={measureRef}>
+        <div className="Stromcek" ref={this.measureRef}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 450">
             <polygon points={tree} style={{ fill: 'green' }} />
             <rect
@@ -115,8 +116,8 @@ class Stromcek extends Component {
 
   tick(idx) {
     console.log('tick', idx);
-    const { contentRect, onFinish } = this.props;
-    const ratio = computeRatio(contentRect);
+    const { onFinish } = this.props;
+    const ratio = computeRatio(this.state.contentRect);
     var name = 'star' + idx;
     if (idx >= zelanie.length) {
       this.setState({ podpis: true });
@@ -135,7 +136,27 @@ class Stromcek extends Component {
   }
 
   componentDidMount() {
+    if (this.measureRef.current) {
+      this.resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          const contentRect = {
+            bounds: {
+              width: entry.contentRect.width,
+              height: entry.contentRect.height,
+            }
+          };
+          this.setState({ contentRect });
+        }
+      });
+      this.resizeObserver.observe(this.measureRef.current);
+    }
     setTimeout(() => this.tick(0), 1000);
+  }
+
+  componentWillUnmount() {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   }
 }
 
@@ -190,4 +211,4 @@ function compY(idx) {
   return Math.floor(50 + Math.pow(Math.floor((idx + 1) / 2), 1.1) * 50);
 }
 
-export default withContentRect('bounds')(Stromcek);
+export default Stromcek;
