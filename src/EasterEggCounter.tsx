@@ -49,7 +49,7 @@ class EasterEggCounter extends Component<Props, State> {
 
   public register(eeName: string): void {
     this.visited[eeName] = false;
-    this.setState((prevState) => ({
+    this.setState((_prevState) => ({
       total: Object.keys(this.visited).length,
     }));
   }
@@ -67,7 +67,7 @@ class EasterEggCounter extends Component<Props, State> {
       return;
     }
     reportEG(eeName);
-    this.setState((prevState) => ({
+    this.setState((_prevState) => ({
       count,
     }));
 

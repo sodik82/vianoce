@@ -1,12 +1,33 @@
-import { Fireworks } from 'fireworks-js/dist/react';
-import React, { Fragment } from 'react';
+import { Fireworks } from 'fireworks-js';
+import React, { Fragment, useEffect, useRef } from 'react';
 import EasterEgg from './EasterEgg';
 import ee from './img/2021sneh.jpg';
 
 export const FireworksOverlay = ({ enabled }) => {
-  const options = {
-    speed: 3,
-  };
+  const containerRef = useRef(null);
+  const fireworksRef = useRef(null);
+
+  useEffect(() => {
+    if (containerRef.current && !fireworksRef.current) {
+      fireworksRef.current = new Fireworks(containerRef.current, {
+        speed: 3,
+      });
+    }
+
+    if (fireworksRef.current) {
+      if (enabled) {
+        fireworksRef.current.start();
+      } else {
+        fireworksRef.current.stop();
+      }
+    }
+
+    return () => {
+      if (fireworksRef.current) {
+        fireworksRef.current.stop();
+      }
+    };
+  }, [enabled]);
 
   const style = {
     top: 0,
@@ -29,7 +50,7 @@ export const FireworksOverlay = ({ enabled }) => {
 
   return (
     <Fragment>
-      <Fireworks options={options} enabled={enabled} style={style}></Fireworks>
+      <div ref={containerRef} style={style}></div>
       <div style={eeStyle}>
         <EasterEgg
           name="fire"
