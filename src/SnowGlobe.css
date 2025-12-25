@@ -2,7 +2,7 @@
   position: absolute;
   bottom: 50px;
   right: 15%;
-  z-index: 50;
+  z-index: 10;
   cursor: pointer;
   width: 120px;
   height: 140px;

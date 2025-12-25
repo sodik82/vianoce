@@ -37,6 +37,7 @@ export const FireworksOverlay = ({ enabled }) => {
     position: 'fixed',
     background: 'transparent',
     pointerEvents: 'none',
+    zIndex: 300,
   };
 
   const eeStyle = {
@@ -45,6 +46,7 @@ export const FireworksOverlay = ({ enabled }) => {
     left: '40%',
     height: 30,
     width: '20%',
+    zIndex: 300,
     // background: 'red',
   };
 
