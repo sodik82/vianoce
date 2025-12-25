@@ -1,0 +1,333 @@
+.snowglobe-container {
+  position: absolute;
+  bottom: 50px;
+  right: 15%;
+  z-index: 50;
+  cursor: pointer;
+  width: 120px;
+  height: 140px;
+}
+
+.snowglobe {
+  position: relative;
+  width: 120px;
+  height: 140px;
+  transition: transform 0.1s ease;
+}
+
+.snowglobe:hover {
+  transform: scale(1.05);
+}
+
+.snowglobe.shake {
+  animation: shake-globe 0.5s ease-in-out;
+}
+
+@keyframes shake-globe {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-5deg); }
+  20% { transform: rotate(5deg); }
+  30% { transform: rotate(-5deg); }
+  40% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+  60% { transform: rotate(5deg); }
+  70% { transform: rotate(-5deg); }
+  80% { transform: rotate(5deg); }
+  90% { transform: rotate(-2deg); }
+}
+
+.snowglobe-glass {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at 30% 30%,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(200, 230, 255, 0.2) 50%,
+    rgba(150, 200, 255, 0.1) 100%);
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    inset -10px -10px 20px rgba(255, 255, 255, 0.3),
+    inset 10px 10px 20px rgba(0, 0, 0, 0.1),
+    0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+.snowglobe-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snowglobe-revealed {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeIn 0.5s ease-in;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.5); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.snowglobe-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  z-index: 10;
+}
+
+.snowglobe-text {
+  position: absolute;
+  bottom: 10%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow:
+    0 0 5px rgba(0, 0, 0, 0.9),
+    0 0 10px rgba(0, 0, 0, 0.7),
+    0 0 15px rgba(255, 255, 255, 0.5);
+  z-index: 11;
+}
+
+.snowglobe-base {
+  width: 100px;
+  height: 25px;
+  margin: 0 auto;
+  background: linear-gradient(to bottom, #8B4513, #654321);
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.snowglobe-base::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 3px;
+  background: #A0522D;
+  border-radius: 50%;
+}
+
+.snow-particle {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  z-index: 20;
+}
+
+.snowglobe.shake .snow-particle {
+  animation-duration: 2.5s !important;
+}
+
+.snow-1 {
+  width: 4px;
+  height: 4px;
+  left: 20%;
+  animation: snowfall-1 4s infinite;
+}
+
+.snow-2 {
+  width: 3px;
+  height: 3px;
+  left: 40%;
+  animation: snowfall-2 5s infinite;
+}
+
+.snow-3 {
+  width: 5px;
+  height: 5px;
+  left: 60%;
+  animation: snowfall-3 4.5s infinite;
+}
+
+.snow-4 {
+  width: 3px;
+  height: 3px;
+  left: 80%;
+  animation: snowfall-4 5.5s infinite;
+}
+
+.snow-5 {
+  width: 4px;
+  height: 4px;
+  left: 30%;
+  animation: snowfall-5 6s infinite;
+}
+
+.snow-6 {
+  width: 3px;
+  height: 3px;
+  left: 50%;
+  animation: snowfall-6 5.2s infinite;
+}
+
+.snow-7 {
+  width: 4px;
+  height: 4px;
+  left: 70%;
+  animation: snowfall-7 4.8s infinite;
+}
+
+.snow-8 {
+  width: 5px;
+  height: 5px;
+  left: 15%;
+  animation: snowfall-8 5.7s infinite;
+}
+
+@keyframes snowfall-1 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(10px); }
+}
+
+@keyframes snowfall-2 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-8px); }
+}
+
+@keyframes snowfall-3 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(12px); }
+}
+
+@keyframes snowfall-4 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-10px); }
+}
+
+@keyframes snowfall-5 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(5px); }
+}
+
+@keyframes snowfall-6 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-6px); }
+}
+
+@keyframes snowfall-7 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(8px); }
+}
+
+@keyframes snowfall-8 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-12px); }
+}
+
+.snow-9 {
+  width: 4px;
+  height: 4px;
+  left: 25%;
+  animation: snowfall-9 5.3s infinite;
+}
+
+.snow-10 {
+  width: 3px;
+  height: 3px;
+  left: 45%;
+  animation: snowfall-10 4.7s infinite;
+}
+
+.snow-11 {
+  width: 5px;
+  height: 5px;
+  left: 65%;
+  animation: snowfall-11 5.9s infinite;
+}
+
+.snow-12 {
+  width: 3px;
+  height: 3px;
+  left: 85%;
+  animation: snowfall-12 4.4s infinite;
+}
+
+.snow-13 {
+  width: 4px;
+  height: 4px;
+  left: 10%;
+  animation: snowfall-13 6.2s infinite;
+}
+
+.snow-14 {
+  width: 3px;
+  height: 3px;
+  left: 55%;
+  animation: snowfall-14 5.1s infinite;
+}
+
+.snow-15 {
+  width: 5px;
+  height: 5px;
+  left: 75%;
+  animation: snowfall-15 4.9s infinite;
+}
+
+.snow-16 {
+  width: 4px;
+  height: 4px;
+  left: 35%;
+  animation: snowfall-16 5.6s infinite;
+}
+
+@keyframes snowfall-9 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(7px); }
+}
+
+@keyframes snowfall-10 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-9px); }
+}
+
+@keyframes snowfall-11 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(11px); }
+}
+
+@keyframes snowfall-12 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-7px); }
+}
+
+@keyframes snowfall-13 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(6px); }
+}
+
+@keyframes snowfall-14 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-11px); }
+}
+
+@keyframes snowfall-15 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(9px); }
+}
+
+@keyframes snowfall-16 {
+  0% { top: -5%; transform: translateX(0); }
+  100% { top: 100%; transform: translateX(-8px); }
+}
+
