@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getCounter } from '../EasterEggCounter';
+import { useEasterEgg } from '../contexts/EasterEggContext';
 
 interface Props {
   name: string;
@@ -11,15 +11,18 @@ interface Props {
 
 export const MazeEsterEgg: React.FC<Props> = (props) => {
   const { name, text, visited, img, children } = props;
+  const { register, onVisit } = useEasterEgg();
+
   React.useEffect(() => {
-    getCounter()?.register(name);
-  }, [name]);
+    register(name);
+  }, [name, register]);
+
   const [closed, setClosed] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
     setClosed(true);
-    getCounter()?.onVisit(name);
-  }, [name]);
+    onVisit(name);
+  }, [name, onVisit]);
 
   React.useEffect(() => {
     if (!visited || closed) {

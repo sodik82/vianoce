@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EasterEgg from './EasterEgg';
 import ee from './img/2017baby.jpg';
 
-class GulovePoschodie extends Component {
-  render() {
-    const { fromX, toX, baseY, last, ratio } = this.props;
-    return (
-      <div>{makeBalls(fromX * ratio, toX * ratio, baseY * ratio, last)}</div>
-    );
-  }
+const GulovePoschodie = ({ fromX, toX, baseY, last, ratio }) => {
+  return (
+    <div>{makeBalls(fromX * ratio, toX * ratio, baseY * ratio, last)}</div>
+  );
+};
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.ratio !== nextProps.ratio;
-  }
-}
+// React.memo with custom comparison - returns true if props are equal (skip re-render)
+const MemoizedGulovePoschodie = React.memo(GulovePoschodie, (prevProps, nextProps) => {
+  // Return true if props are equal (no re-render needed)
+  return prevProps.ratio === nextProps.ratio;
+});
 
 function makeBalls(fromX, toX, baseY, last) {
   const balls = [];
@@ -72,4 +71,4 @@ function Ball(props) {
   );
 }
 
-export default GulovePoschodie;
+export default MemoizedGulovePoschodie;
