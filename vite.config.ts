@@ -8,13 +8,6 @@ export default defineConfig({
     }),
   ],
   base: '/vianoce/',
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-      },
-    },
-  },
   optimizeDeps: {
     esbuildOptions: {
       loader: {

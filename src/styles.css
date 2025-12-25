@@ -7,66 +7,112 @@
   background: radial-gradient(10px 10px, circle, rgba(0,0,0,0.0), rgba(0,0,0,0.7));
 }
 
-.circle(@c) {
+.modra {
   display: block;
-  background: @c;
+  background: #0000ff;
   border-radius: 50%;
   height: 20px;
   width: 20px;
   margin: 0;
 }
 
-.modra {
-  .circle(#0000ff);
-}
-
 .cervena {
-  .circle(#ff0000);
+  display: block;
+  background: #ff0000;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 0;
 }
 
 .zlta {
-  .circle(yellow);
+  display: block;
+  background: yellow;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 0;
 }
 
 .zelena {
-  .circle(#00FF00);
+  display: block;
+  background: #00FF00;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 0;
 }
 
 .oranzova {
-  .circle(orange);
-}
-
-@-webkit-keyframes gulaAnim {
-  0% { .modra; }
-  20% { .zelena; }
-  40% { .oranzova; }
-  60% { .cervena;}
-  80% { .zlta; }
-  100% { .modra; }
+  display: block;
+  background: orange;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  margin: 0;
 }
 
 @keyframes gulaAnim {
-  0% { .modra; }
-  20% { .zelena; }
-  40% { .oranzova; }
-  60% { .cervena;}
-  80% { .zlta; }
-  100% { .modra; }
+  0% {
+    display: block;
+    background: #0000ff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
+  20% {
+    display: block;
+    background: #00FF00;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
+  40% {
+    display: block;
+    background: orange;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
+  60% {
+    display: block;
+    background: #ff0000;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
+  80% {
+    display: block;
+    background: yellow;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
+  100% {
+    display: block;
+    background: #0000ff;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    margin: 0;
+  }
 }
 
 .gula1 {
   animation-name: gulaAnim;
   animation-iteration-count: infinite;
   animation-duration: 10s;
-  -webkit-animation-name: gulaAnim;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-duration: 10s;
 }
 
-// dears
+/* dears */
 
 .deer {
-  background-image: url("reindeer.png");
+  background-image: url("./img/reindeer.png");
   height: 60px;
   width: 60px;
   background-size: 60px 60px;
@@ -79,7 +125,7 @@
   margin-left: -10px;
 }
 
-// darcek
+/* darcek */
 
 #container {
     padding:50px;
