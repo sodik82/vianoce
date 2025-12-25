@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './SnowGlobe.css';
 import { getCounter } from './EasterEggCounter';
-import ee2025 from './img/2024vianoce.jpg'; // Placeholder - update later
+import ee2025 from './img/2025okno.jpg';
 
 const SnowGlobe = () => {
   const [isShaking, setIsShaking] = useState(false);
