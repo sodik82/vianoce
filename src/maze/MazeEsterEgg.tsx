@@ -15,6 +15,27 @@ export const MazeEsterEgg: React.FC<Props> = (props) => {
     getCounter()?.register(name);
   }, [name]);
   const [closed, setClosed] = React.useState(false);
+
+  const handleClose = React.useCallback(() => {
+    setClosed(true);
+    getCounter()?.onVisit(name);
+  }, [name]);
+
+  React.useEffect(() => {
+    if (!visited || closed) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [visited, closed, handleClose]);
+
   return (
     <React.Fragment>
       {children}
@@ -22,10 +43,7 @@ export const MazeEsterEgg: React.FC<Props> = (props) => {
         <div className="maze-ee">
           <button
             className="maze-ee-close"
-            onClick={() => {
-              setClosed(true);
-              getCounter()?.onVisit(name);
-            }}
+            onClick={handleClose}
           >
             X
           </button>
