@@ -37,22 +37,9 @@ const SnowGlobe = () => {
                 <div className="snowglobe-text">2025</div>
               </div>
             )}
-            <div className="snow-particle snow-1"></div>
-            <div className="snow-particle snow-2"></div>
-            <div className="snow-particle snow-3"></div>
-            <div className="snow-particle snow-4"></div>
-            <div className="snow-particle snow-5"></div>
-            <div className="snow-particle snow-6"></div>
-            <div className="snow-particle snow-7"></div>
-            <div className="snow-particle snow-8"></div>
-            <div className="snow-particle snow-9"></div>
-            <div className="snow-particle snow-10"></div>
-            <div className="snow-particle snow-11"></div>
-            <div className="snow-particle snow-12"></div>
-            <div className="snow-particle snow-13"></div>
-            <div className="snow-particle snow-14"></div>
-            <div className="snow-particle snow-15"></div>
-            <div className="snow-particle snow-16"></div>
+            {Array.from({ length: 16 }).map((_, i) => (
+              <div key={'snow-particle-' + i} className={'snow-particle snow-' + (i + 1)} />
+            ))}
           </div>
         </div>
         <div className="snowglobe-base"></div>
