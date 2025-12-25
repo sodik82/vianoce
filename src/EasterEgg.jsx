@@ -1,52 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useEasterEgg } from './contexts/EasterEggContext';
 
-import { getCounter } from './EasterEggCounter';
+const EasterEgg = ({ name, className, position, style, text, textStyle = {}, children }) => {
+  const [visible, setVisible] = useState(false);
+  const { register, onVisit } = useEasterEgg();
 
-class EasterEgg extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { visible: false };
-  }
+  useEffect(() => {
+    register(name);
+  }, [name, register]);
 
-  render() {
-    const { className, position, style, text, textStyle = {} } = this.props;
-    const inStyle = Object.assign(
-      { position: 'absolute', zIndex: 200 },
-      position
-    );
-    return (
-      <div
-        className={className}
-        style={{ zIndex: 100, ...style }}
-        onMouseEnter={this.show}
-        onMouseLeave={this.hide}
-      >
-        {this.state.visible && (
-          <div style={inStyle}>
-            {text && (
-              <div style={textStyle} className="EE-text">
-                {text}
-              </div>
-            )}
-            {this.props.children}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  componentDidMount() {
-    getCounter().register(this.props.name);
-  }
-
-  show = () => {
-    console.log('show!', this.props.name);
-    this.setState({ visible: true });
-    getCounter().onVisit(this.props.name);
+  const show = () => {
+    console.log('show!', name);
+    setVisible(true);
+    onVisit(name);
   };
-  hide = () => {
-    this.setState({ visible: false });
+
+  const hide = () => {
+    setVisible(false);
   };
-}
+
+  const inStyle = Object.assign(
+    { position: 'absolute', zIndex: 200 },
+    position
+  );
+
+  return (
+    <div
+      className={className}
+      style={{ zIndex: 100, ...style }}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+    >
+      {visible && (
+        <div style={inStyle}>
+          {text && (
+            <div style={textStyle} className="EE-text">
+              {text}
+            </div>
+          )}
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default EasterEgg;

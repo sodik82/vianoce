@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './SnowGlobe.css';
-import { getCounter } from './EasterEggCounter';
+import { useEasterEgg } from './contexts/EasterEggContext';
 import ee2025 from './img/2025okno.jpg';
 
 const SnowGlobe = () => {
   const [isShaking, setIsShaking] = useState(false);
   const [isDiscovered, setIsDiscovered] = useState(false);
+  const { register, onVisit } = useEasterEgg();
 
   useEffect(() => {
     // Register this easter egg with the counter
-    getCounter()?.register('snowglobe-2025');
-  }, []);
+    register('snowglobe-2025');
+  }, [register]);
 
   const handleClick = () => {
     setIsShaking(true);
@@ -19,7 +20,7 @@ const SnowGlobe = () => {
     if (!isDiscovered) {
       setIsDiscovered(true);
       // Mark as visited in the counter
-      getCounter()?.onVisit('snowglobe-2025');
+      onVisit('snowglobe-2025');
     }
   };
 
